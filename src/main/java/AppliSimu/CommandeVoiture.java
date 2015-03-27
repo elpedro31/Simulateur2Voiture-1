@@ -14,7 +14,7 @@ public class CommandeVoiture extends JPanel implements ActionListener{
 	
 	private JButton boutonAccelerer;
 	private JButton boutonInverserDirection;
-	private Voiture maVoiture;
+	private Voiture maVoiture; 
 	
 	
 	public CommandeVoiture (JFrame fenetre, Voiture maVoiture) {
