@@ -57,7 +57,6 @@ public class Voiture extends Observable {
 
     public void setDirection(int angleDirection) {
         this.directionEnDegres = angleDirection;
-        
     }
 
     public void inverserDirection() {
@@ -70,5 +69,8 @@ public class Voiture extends Observable {
     return directionEnDegres;
     }
 
-    
+
+    public int getY() {
+        return y;
+    }
 }

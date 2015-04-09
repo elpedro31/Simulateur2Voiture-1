@@ -14,12 +14,14 @@ import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
+import DomaineRoute.Route;
 import DomaineVoiture.Voiture;
 
 public class IHMVoiture extends JFrame implements Observer{
 
-    private double paramatreConversionMetresPixels = 0.5;
+    private double parametreConversionMetresPixels = 0.5;
     private Voiture maVoiture;
+    private Route maRoute;
     private CommandeVoiture maCommandeVoiture;
     
     private void initGraphique() {
@@ -31,9 +33,10 @@ public class IHMVoiture extends JFrame implements Observer{
         this.setVisible(true);
     }
     
-    public IHMVoiture(Voiture maVoiture) {
+    public IHMVoiture(Voiture maVoiture,Route maRoute) {
         super();
         this.maVoiture = maVoiture;
+        this.maRoute = maRoute;
         maVoiture.addObserver(this);
         initGraphique();
     }
@@ -42,10 +45,11 @@ public class IHMVoiture extends JFrame implements Observer{
         super();
         initGraphique();
         this.maVoiture = null;
+        this.maRoute=null;
     }
     
     public int calculerPositionPixels(int xMetres) {
-        return (int) (paramatreConversionMetresPixels * xMetres);    
+        return (int) (parametreConversionMetresPixels * xMetres);    
     }
 
     @Override
@@ -56,7 +60,7 @@ public class IHMVoiture extends JFrame implements Observer{
     @Override
     public void paint(Graphics contexteGraphique) {
         super.paint(contexteGraphique);
-        contexteGraphique.setColor(Color.red);
+        dessinerRoute(contexteGraphique);
         dessinerVoiture(contexteGraphique);
     }
 
@@ -64,7 +68,18 @@ public class IHMVoiture extends JFrame implements Observer{
     private void dessinerVoiture(Graphics contexteGraphique) {
         int xMetres = maVoiture.getX();
         int xPixel = calculerPositionPixels(xMetres);
-        contexteGraphique.fillRect(xPixel, 300, 30, 15);
+        int yMetres = maVoiture.getY();
+        int yPixel = calculerPositionPixels(yMetres);
+        contexteGraphique.setColor(Color.RED);
+        contexteGraphique.fillRect(xPixel, yPixel, 30, 20);
     }
-    
+
+    private void dessinerRoute(Graphics contexteGraphique) {
+        int xMetres = maRoute.getX();
+        int yMetres = maRoute.getY();
+        int xPixel = calculerPositionPixels(xMetres);
+        int yPixel = calculerPositionPixels(yMetres);
+        contexteGraphique.setColor(Color.DARK_GRAY);
+        contexteGraphique.fillRect(xPixel, yPixel, 1000, 60);
+    }
 }
