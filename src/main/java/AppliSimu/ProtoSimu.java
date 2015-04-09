@@ -15,7 +15,7 @@ public class ProtoSimu {
 
     public static void main(String[] args) throws PositionInvalideException {
 
-        final Voiture maVoiture = new Voiture (100, 0, 10);
+        final Voiture maVoiture = new Voiture (10, 600, 10);
         final Route maRoute = new Route(0,600,0);
         IHMVoiture maVoitureIHM = new IHMVoiture(maVoiture,maRoute);
         
